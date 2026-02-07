@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/png" href="1 LOGO 3D.png">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Montserrat:wght@100;300;600;900&display=swap" rel="stylesheet">
+    
+    <title>IPERS | EXECUTIVE CONSOLE</title>
+    <style>
+        :root {
+            --admin-red: #ff3c3c;
+            --bg-ultra: #020203;
+            --sidebar-min: 60px;
+            --sidebar-max: 260px;
+            --header-height: 50px;
+        }
+
+        /* --- PRINT ENGINE (LANDSCAPE) --- */
+        @media print {
+            @page { size: landscape; margin: 0.5cm; }
+            .sidebar, .exec-header, #boot-screen { display: none !important; }
+            .main-view { margin-left: 0 !important; height: auto !important; }
+            iframe { height: 18cm !important; width: 100% !important; border: 1px solid #000 !important; }
+        }
+
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            background: var(--bg-ultra); color: #fff;
+            font-family: 'Montserrat', sans-serif; overflow: hidden;
+        }
+
+        /* --- BLADE SIDEBAR --- */
+        .sidebar {
+            position: fixed; left: 0; top: 0; bottom: 0;
+            width: var(--sidebar-min); background: #000;
+            border-right: 1px solid rgba(255, 60, 60, 0.2);
+            z-index: 1000; transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column; align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        .sidebar:hover { width: var(--sidebar-max); background: #080202; }
+
+        .side-brand { height: var(--header-height); display: flex; align-items: center; justify-content: center; width: 100%; }
+        .side-brand img { width: 30px; filter: grayscale(1) brightness(2); transition: 0.3s; }
+        .sidebar:hover .side-brand img { width: 45px; filter: grayscale(0); }
+
+        .nav-stack { width: 100%; margin-top: 20px; }
+        .nav-link {
+            display: flex; align-items: center; width: 100%; height: 55px;
+            text-decoration: none; color: #555; transition: 0.2s; cursor: pointer;
+            border-left: 3px solid transparent; overflow: hidden;
+        }
+        .nav-link i { min-width: var(--sidebar-min); text-align: center; font-style: normal; font-size: 20px; }
+        .nav-link span { 
+            font-size: 10px; font-weight: 600; letter-spacing: 2px;
+            opacity: 0; transition: 0.2s; white-space: nowrap; text-transform: uppercase;
+        }
+        .sidebar:hover .nav-link span { opacity: 1; }
+        .nav-link:hover { color: #fff; background: rgba(255, 60, 60, 0.1); }
+        .nav-link.active { color: var(--admin-red); border-left-color: var(--admin-red); background: rgba(255, 60, 60, 0.05); }
+
+        /* --- SECURITY RIBBON --- */
+        .security-ribbon {
+            margin-top: auto; padding: 20px;
+            font-size: 8px; line-height: 1.6; color: #222;
+            transition: 0.3s; pointer-events: none;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .sidebar:hover .security-ribbon { color: #555; }
+        .security-ribbon strong { color: #333; transition: 0.3s; }
+        .sidebar:hover .security-ribbon strong { color: var(--admin-red); }
+
+        /* --- SLIM HEADER --- */
+        .exec-header {
+            height: var(--header-height);
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 30px; margin-left: var(--sidebar-min);
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exec-title { font-size: 11px; letter-spacing: 4px; color: #666; font-weight: 300; }
+        .exec-title b { color: var(--admin-red); font-weight: 900; letter-spacing: 1px; }
+
+        /* --- DATA CHASSIS --- */
+        .main-view {
+            height: calc(100vh - var(--header-height));
+            margin-left: var(--sidebar-min);
+            background: #000; position: relative;
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        iframe { width: 100%; height: 100%; border: none; background: #fff; }
+
+        /* BOOT SCREEN */
+        #boot-screen {
+            position: fixed; inset: 0; background: #000; z-index: 9999;
+            display: flex; justify-content: center; align-items: center; transition: 0.5s;
+        }
+        .loader { width: 30px; height: 30px; border: 2px solid #111; border-top-color: var(--admin-red); border-radius: 50%; animation: spin 0.6s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="boot-screen"><div class="loader"></div></div>
+
+    <aside class="sidebar">
+        <div class="side-brand"><img src="1 LOGO 3D.png"></div>
+        
+        <div class="nav-stack">
+            <div class="nav-link active" onclick="location.reload()"><i>📊</i><span>Individual Performance Assessment</span></div>
+            <div class="nav-link" onclick="window.print()"><i>💾</i><span>Print View Admin Report</span></div>
+            <div class="nav-link" onclick="location.href='https://iperassessment.rprmd9.site/assesment'"><i>📝</i><span>Assessment Form</span></div>
+            <div style="margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.05);"></div>
+            <div class="nav-link" onclick="location.href='https://script.google.com/macros/s/AKfycbywXKwkkKEuQs9kkik_Ms9LQIGRPQaDtwNqK6XKDtc0sf3GUuPqT0ekRH1MMaGxMuYg/exec'"><i>🚪</i><span>Exit to User View</span></div>
+        </div>
+
+        <div class="security-ribbon">
+            <strong>NOTICE:</strong> This is a restricted government system. All activities are monitored and logged by the <strong>Regional Personnel and Records Management Division</strong>.
+        </div>
+    </aside>
+
+    <header class="exec-header">
+        <div class="exec-title">
+            IPERS | <b>ADMINISTRATIVE ASSESSMENT CONSOLE</b>
+        </div>
+        <div style="font-family: 'Share Tech Mono'; font-size: 12px; color: #444; display: flex; gap: 20px;">
+            <span id="clock">00:00:00</span>
+            <span style="color: var(--admin-red);">SECURE_NODE_09</span>
+        </div>
+    </header>
+
+    <main class="main-view">
+        <iframe src="https://script.google.com/macros/s/AKfycbzHqC-7TgBKuBENmYXQZBsS6sqROyk4_QukVCsZ5LdqsJl_E9t3bfyEl6OuIKu0Rv7R/exec?page=Admin"></iframe>
+    </main>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('boot-screen').style.opacity = '0';
+                setTimeout(() => document.getElementById('boot-screen').style.display = 'none', 500);
+            }, 800);
+        });
+
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
+        }, 1000);
+    </script>
+</body>
+</html>
