@@ -5,153 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="1 LOGO 3D.png">
     <link rel="apple-touch-icon" href="1 LOGO 3D.png">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <title>PRO9 IPER'S | SECURE ARCHIVE</title>
+    <title>PRO9 IPER'S | TACTICAL ARCHIVE</title>
     <style>
         :root {
-            --pnp-blue: #001a33;
+            --pnp-blue: #000b1a;
             --pnp-gold: #d4af37;
-            --interface-bg: #04080f;
-            --terminal-green: #00ff41;
-            --sidebar-width: 280px;
+            --pnp-gold-glow: rgba(212, 175, 55, 0.4);
+            --interface-bg: #02060c;
+            --terminal-green: #00ff9d;
+            --sidebar-width: 300px;
         }
 
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
             background-color: var(--interface-bg);
-            font-family: 'Inter', sans-serif;
-            color: white; overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            color: #e0e0e0; overflow: hidden;
         }
 
-        /* --- THE BOOT TERMINAL (Retro Archive Look) --- */
+        /* --- THE BOOT TERMINAL (Biometric Scan) --- */
         #boot-screen {
             position: fixed;
             inset: 0;
             background: #000;
-            z-index: 999;
+            z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* CRT Scanline Effect */
-        #boot-screen::before {
-            content: " ";
-            display: block;
+        .scan-ring {
             position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 118, 0.06));
-            z-index: 1000;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
+            width: 240px; height: 240px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--pnp-gold);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
         }
 
         .boot-content { text-align: center; z-index: 1001; }
         
         .logo-orig {
-            width: 180px;
-            filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
-            animation: breathe 3s infinite ease-in-out;
+            width: 160px;
+            filter: drop-shadow(0 0 20px var(--pnp-gold-glow));
+            margin-bottom: 20px;
         }
 
-        /* --- MAIN INTERFACE --- */
+        /* --- MAIN INTERFACE GRID --- */
         .main-container {
             display: grid;
             grid-template-columns: var(--sidebar-width) 1fr;
             height: 100vh;
             opacity: 0;
-            transition: opacity 1.5s ease;
+            transform: scale(1.02);
+            transition: all 1.2s ease-out;
+            background: radial-gradient(circle at center, #050d1a 0%, #02060c 100%);
         }
 
-        body.ready .main-container { opacity: 1; }
+        body.ready .main-container { opacity: 1; transform: scale(1); }
         body.ready #boot-screen { opacity: 0; pointer-events: none; }
 
         /* Tactical Sidebar */
         .sidebar {
-            background: #070c14;
-            border-right: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 30px 20px;
+            background: rgba(4, 12, 24, 0.95);
+            border-right: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 25px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
         }
 
-        .side-logo-container {
-            background: radial-gradient(circle, #0a1e3d 0%, #070c14 100%);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+        .side-header {
+            border-bottom: 1px double var(--pnp-gold);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
-        .side-logo-container img { width: 100px; height: auto; }
+        .side-header img { width: 100px; margin-bottom: 10px; }
 
-        .sys-info {
+        .sys-info-box {
             font-family: 'Share Tech Mono', monospace;
             font-size: 11px;
-            color: #667;
-            line-height: 1.8;
+            background: rgba(0,0,0,0.6);
             padding: 15px;
-            background: rgba(0,0,0,0.3);
-            border: 1px dashed #222;
+            border-radius: 4px;
+            border-left: 3px solid var(--pnp-gold);
+            color: #8a9bb0;
+            line-height: 1.8;
         }
 
-        .label { color: var(--pnp-gold); font-weight: bold; }
+        .log-stream {
+            margin-top: 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: var(--terminal-green);
+            height: 120px;
+            overflow: hidden;
+            opacity: 0.7;
+        }
 
-        /* Archive Document Area */
+        /* Main Console Area */
         .document-area {
             display: flex;
             flex-direction: column;
-            background: #0d1117;
+            padding: 20px;
             position: relative;
         }
 
         .top-nav {
-            height: 60px;
-            background: #0a0e14;
             display: flex;
-            align-items: center;
-            padding: 0 30px;
             justify-content: space-between;
-            border-bottom: 1px solid #1f242c;
+            align-items: flex-end;
+            margin-bottom: 15px;
+            padding: 0 10px;
         }
 
-        .doc-title {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 14px;
-            color: #fff;
+        .doc-label {
+            font-size: 10px;
+            color: var(--pnp-gold);
+            letter-spacing: 3px;
+            font-weight: 700;
         }
 
-        .content-frame {
+        /* The Chassis (Document Lightbox) */
+        .content-chassis {
             flex-grow: 1;
-            margin: 15px;
             background: #fff;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            border-radius: 8px;
             position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.2);
+            border: 8px solid #1a1e26;
+            overflow: hidden;
         }
 
-        /* Floating Badge */
-        .official-seal {
+        /* Tactical Corner Markers */
+        .corner {
             position: absolute;
-            top: 20px; right: 20px;
-            width: 80px; opacity: 0.1;
-            pointer-events: none;
+            width: 20px; height: 20px;
+            border: 2px solid var(--pnp-gold);
+            z-index: 5;
         }
+        .tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+        .tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+        .bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+        .br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
 
         iframe { width: 100%; height: 100%; border: none; }
 
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.2)); }
-            50% { transform: scale(1.05); filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.5)); }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Mobile Adjustments */
+        /* Mobile View */
         @media (max-width: 900px) {
             .main-container { grid-template-columns: 1fr; }
             .sidebar { display: none; }
@@ -161,46 +169,58 @@
 <body>
 
     <div id="boot-screen">
+        <div class="scan-ring"></div>
         <div class="boot-content">
-            <img src="1 LOGO 3D.png" class="logo-orig" alt="PNP SEAL">
-            <div id="status" style="font-family: 'Share Tech Mono'; color: var(--pnp-gold); margin-top: 20px; font-size: 12px; letter-spacing: 2px;">
-                CONNECTING TO RPRMD-IX ARCHIVES...
+            <img src="1 LOGO 3D.png" class="logo-orig" alt="PNP">
+            <div id="status" style="font-family: 'Share Tech Mono'; color: var(--pnp-gold); font-size: 12px; letter-spacing: 4px;">
+                AUTHORIZING UPLINK...
             </div>
         </div>
     </div>
 
     <div class="main-container">
+        
         <aside class="sidebar">
-            <div class="side-logo-container">
+            <div class="side-header">
                 <img src="1 LOGO 3D.png" alt="PRO9">
-                <div style="font-family: 'Montserrat'; font-size: 10px; margin-top: 10px; color: #fff;">REGION IX</div>
+                <div style="font-weight: 900; font-size: 14px; color: #fff; letter-spacing: 1px;">RPRMD-IX TERMINAL</div>
+                <div style="font-size: 10px; color: var(--pnp-gold);">SECURE PERSONNEL ARCHIVE</div>
             </div>
 
-            <div class="sys-info">
-                <span class="label">NODE:</span> ZAMB-P9-SERVER<br>
-                <span class="label">STATUS:</span> <span style="color: var(--terminal-green)">SECURE CONNECTION</span><br>
-                <span class="label">ENCRYPTION:</span> RSA-4096<br>
-                <span class="label">USER_ACCESS:</span> GUEST_PORTAL<br>
-                <span class="label">TIMESTAMP:</span> <span id="clock">---</span>
+            <div class="sys-info-box">
+                <span style="color:var(--pnp-gold)">NODE:</span> Regional Personnel and Records Management Division<br>
+                <span style="color:var(--pnp-gold)">NET:</span> ENCRYPTED VPN<br>
+                <span style="color:var(--pnp-gold)">TIME:</span> <span id="clock">00:00:00</span><br>
+                <span style="color:var(--pnp-gold)">AUTH:</span> CLEARANCE_LEVEL_4
             </div>
 
-            <div style="margin-top: auto; font-size: 9px; color: #445; line-height: 1.5; font-family: 'Share Tech Mono';">
-                WARNING: UNAUTHORIZED ACCESS TO THIS POLICE PERSONNEL SYSTEM IS STRICTLY PROHIBITED UNDER RA 10175.
+            <div class="log-stream" id="logs">
+                > Initializing Feed...<br>
+                > Port 443 Handshake...<br>
+                > Verifying Integrity...<br>
+            </div>
+
+            <div style="margin-top: auto; font-size: 9px; color: #4b5a6d; line-height: 1.6; border-top: 1px solid #1a2e44; padding-top: 15px;">
+                <strong>NOTICE:</strong> This is a restricted government system. All activities are monitored and logged by the Regional Personnel and Records Management Division.
             </div>
         </aside>
 
         <main class="document-area">
             <header class="top-nav">
-                <div class="doc-title">
-                    <span style="color: var(--pnp-gold);">●</span> IPERS Assessment Interface
+                <div>
+                    <div class="doc-label">OFFICIAL DOCUMENT FEED</div>
+                    <div style="font-weight: 900; font-size: 18px; letter-spacing: 2px;">IPER ASSESSMENT</div>
                 </div>
-                <div style="font-family: 'Share Tech Mono'; font-size: 12px; color: #556;">
-                    DOC_ID: <span style="color: #889;">IPER-9-00124</span>
+                <div style="text-align: right;">
+                    <div class="doc-label">FILE REFERENCE</div>
+                    <div style="font-family: 'Share Tech Mono'; color: #8a9bb0;">RPRMD-DOC-202602-7</div>
                 </div>
             </header>
 
-            <div class="content-frame">
-                <img src="1 LOGO 3D.png" class="official-seal">
+            <div class="content-chassis">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+                
                 <iframe 
                     src="https://script.google.com/macros/s/AKfycbywXKwkkKEuQs9kkik_Ms9LQIGRPQaDtwNqK6XKDtc0sf3GUuPqT0ekRH1MMaGxMuYg/exec" 
                     allowfullscreen>
@@ -210,27 +230,43 @@
     </div>
 
     <script>
-        // Loading Sequence
+        // Log Stream Generator
+        const logs = document.getElementById('logs');
+        const entries = [
+            "> Decoding Data Packets...",
+            "> Refreshing Node-09...",
+            "> Security Check: Passed",
+            "> Syncing Local Registry...",
+            "> Establishing SSL Tunnel...",
+            "> Fetching Secure Form..."
+        ];
+        
+        setInterval(() => {
+            const line = entries[Math.floor(Math.random() * entries.length)];
+            logs.innerHTML += line + "<br>";
+            if (logs.innerHTML.split("<br>").length > 8) {
+                logs.innerHTML = logs.innerHTML.split("<br>").slice(1).join("<br>");
+            }
+        }, 3000);
+
+        // Boot Logic
         window.addEventListener('load', () => {
             const status = document.getElementById('status');
-            const messages = ["BYPASSING FIREWALL...", "FETCHING DATASET...", "INTEGRITY CHECK COMPLETE", "WELCOME"];
+            const messages = ["DECRYPTING...", "VERIFYING...", "HANDSHAKE OK", "ACCESS GRANTED"];
             let i = 0;
-            
             const interval = setInterval(() => {
-                if(i < messages.length) {
-                    status.innerText = messages[i];
-                    i++;
-                } else {
+                if(i < messages.length) { status.innerText = messages[i++]; }
+                else { 
                     clearInterval(interval);
                     document.body.classList.add('ready');
                 }
-            }, 700);
+            }, 600);
         });
 
-        // Real-time Clock for Sidebar
+        // Live Clock
         function updateClock() {
             const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleString();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
         }
         setInterval(updateClock, 1000);
         updateClock();
