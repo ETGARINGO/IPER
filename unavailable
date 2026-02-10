@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Update | System Maintenance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --text-dark: #09090b;
+            --text-muted: #71717a;
+            --border-light: #f4f4f5;
+            --bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Settings Icon Mode */
+        .icon-container {
+            margin-bottom: 3.5rem;
+        }
+
+        .icon-container i {
+            font-size: 2.25rem;
+            color: var(--text-dark);
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .content {
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 4rem;
+        }
+
+        /* Full Width Status - No Time References */
+        .status-strip {
+            display: flex;
+            justify-content: center;
+            gap: 6rem;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 4rem;
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+        }
+
+        .value {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Pulse Indicator for "Live" status */
+        .live-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #10b981;
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .btn {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-dark);
+            padding-bottom: 4px;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.4;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        @media (max-width: 640px) {
+            .status-strip { gap: 2rem; flex-direction: column; padding: 2rem 0; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="icon-container">
+        <i class="fa-solid fa-gear"></i>
+    </div>
+
+    <div class="content">
+        <h1>Undergoing scheduled maintenance.</h1>
+        <p>We are currently updating our system settings to improve platform performance. Service will resume automatically once the configuration is finalized.</p>
+
+        <div class="status-strip">
+            <div class="status-item">
+                <span class="label">System Status</span>
+                <span class="value"><span class="live-dot"></span> Active</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Current Task</span>
+                <span class="value">Optimizing Database</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Availability</span>
+                <span class="value">Limited Access</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="javascript:location.reload()" class="btn">Refresh System</a>
+            <a href="mailto:support@corporate.com" class="btn">Contact Administrator</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Enterprise Infrastructure Group.
+    </div>
+
+</body>
+</html>
