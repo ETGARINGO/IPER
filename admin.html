@@ -21,107 +21,124 @@
             overflow: hidden;
         }
 
-        /* --- TERMINAL CONTAINER --- */
-        .info-card {
-            width: 90%;
-            max-width: 500px;
+        /* --- TERMINATED CHASSIS --- */
+        .info-container {
+            width: 85%;
+            max-width: 550px;
             padding: 40px;
             text-align: center;
-            border: 1px solid rgba(255, 60, 60, 0.2);
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 60, 60, 0.15);
+            background: linear-gradient(145deg, #050505 0%, #000000 100%);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             position: relative;
         }
 
-        .info-card::before {
+        .info-container::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 2px;
             background: var(--admin-red);
         }
 
-        .brand-icon { width: 60px; margin-bottom: 20px; filter: grayscale(1); opacity: 0.8; }
+        .brand-logo { 
+            width: 70px; 
+            margin-bottom: 25px; 
+            filter: grayscale(1) brightness(1.5);
+            opacity: 0.7;
+        }
 
         h1 { 
-            font-size: 14px; 
-            letter-spacing: 5px; 
+            font-size: 13px; 
+            letter-spacing: 6px; 
             color: var(--admin-red); 
             text-transform: uppercase; 
             margin-bottom: 20px;
             font-weight: 900;
         }
 
-        p { 
-            font-size: 12px; 
-            line-height: 1.8; 
-            color: #888; 
-            margin-bottom: 30px; 
-            letter-spacing: 1px;
+        .message { 
+            font-size: 11px; 
+            line-height: 2; 
+            color: #777; 
+            margin-bottom: 40px; 
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
-        .btn-return {
-            display: inline-block;
-            padding: 12px 30px;
-            border: 1px solid #333;
-            color: #fff;
+        .message b { color: #aaa; }
+
+        .action-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-exit {
+            padding: 12px 35px;
+            border: 1px solid #222;
+            color: #666;
             text-decoration: none;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            transition: 0.3s;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .btn-return:hover {
-            background: var(--admin-red);
-            border-color: var(--admin-red);
-            color: #000;
-        }
-
-        .security-footer {
-            position: absolute;
-            bottom: 20px;
-            font-size: 9px;
-            color: #333;
-            text-transform: uppercase;
+            font-size: 11px;
+            transition: 0.4s;
             letter-spacing: 2px;
         }
 
-        /* Subtle Glow */
-        .glow {
+        .btn-exit:hover {
+            border-color: var(--admin-red);
+            color: #fff;
+            background: rgba(255, 60, 60, 0.05);
+        }
+
+        .status-footer {
             position: absolute;
-            width: 150px; height: 150px;
-            background: var(--admin-red);
-            filter: blur(120px);
-            opacity: 0.1;
-            z-index: -1;
+            bottom: -60px;
+            left: 0;
+            width: 100%;
+            font-family: 'Share Tech Mono';
+            font-size: 10px;
+            color: #333;
+            letter-spacing: 3px;
+        }
+
+        /* Scanline Effect */
+        .info-container::after {
+            content: " ";
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 2;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="glow"></div>
-
-    <div class="info-card">
-        <img src="1 LOGO 3D.png" class="brand-icon" alt="Logo">
+    <div class="info-container">
+        <img src="1 LOGO 3D.png" class="brand-logo" alt="Logo">
         
-        <h1>Console Disconnected</h1>
+        <h1>System Session Closed</h1>
         
-        <p>
-            Your administrative session has been securely terminated or the page has been moved. 
-            For security reasons, access to the <b>Executive Assessment Console</b> is restricted to authorized personnel only.
-        </p>
+        <div class="message">
+            The <b>Executive Assessment Console</b> has been disconnected. <br>
+            All administrative tokens have been revoked. <br>
+            Access is now restricted to <b>Level 4 Personnel</b> only.
+        </div>
 
-        <a href="https://iperassessment.rprmd9.site/assesment" class="btn-return">Return to Main Portal</a>
-    </div>
+        <div class="action-area">
+            <a href="https://iperassessment.rprmd9.site/admin" class="btn-exit">RETURN TO LOGIN</a>
+        </div>
 
-    <div class="security-footer">
-        RPRMD | SECURE_NODE_TERMINATED
+        <div class="status-footer">
+            NODE: SECURE_09 // STATUS: TERMINATED
+        </div>
     </div>
 
     <script>
-        // Optional: Auto-close tab after 10 seconds if opened via script
-        // setTimeout(() => { window.close(); }, 10000);
+        // Simple log for audit trail
+        console.log("Session manually closed at: " + new Date().toISOString());
     </script>
 </body>
 </html>
