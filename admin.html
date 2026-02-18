@@ -2,181 +2,143 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Update | System Maintenance</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/png" href="1 LOGO 3D.png">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Montserrat:wght@100;300;600;900&display=swap" rel="stylesheet">
+    
+    <title>IPERS | SESSION TERMINATED</title>
     <style>
         :root {
-            --text-dark: #09090b;
-            --text-muted: #71717a;
-            --border-light: #f4f4f5;
-            --bg: #ffffff;
+            --admin-red: #ff3c3c;
+            --bg-ultra: #020203;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            background: var(--bg-ultra); color: #fff;
+            font-family: 'Montserrat', sans-serif; 
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-dark);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* --- TERMINATED CHASSIS --- */
+        .info-container {
+            width: 85%;
+            max-width: 550px;
+            padding: 40px;
             text-align: center;
-            padding: 24px;
-            -webkit-font-smoothing: antialiased;
+            border: 1px solid rgba(255, 60, 60, 0.15);
+            background: linear-gradient(145deg, #050505 0%, #000000 100%);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
         }
 
-        /* Settings Icon Mode */
-        .icon-container {
-            margin-bottom: 3.5rem;
+        .info-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--admin-red);
         }
 
-        .icon-container i {
-            font-size: 2.25rem;
-            color: var(--text-dark);
-            animation: spin 8s linear infinite;
+        .brand-logo { 
+            width: 70px; 
+            margin-bottom: 25px; 
+            filter: grayscale(1) brightness(1.5);
+            opacity: 0.7;
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        h1 { 
+            font-size: 13px; 
+            letter-spacing: 6px; 
+            color: var(--admin-red); 
+            text-transform: uppercase; 
+            margin-bottom: 20px;
+            font-weight: 900;
         }
 
-        .content {
-            max-width: 600px;
+        .message { 
+            font-size: 11px; 
+            line-height: 2; 
+            color: #777; 
+            margin-bottom: 40px; 
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: -0.04em;
-            margin-bottom: 1.5rem;
-        }
+        .message b { color: #aaa; }
 
-        p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 4rem;
-        }
-
-        /* Full Width Status - No Time References */
-        .status-strip {
-            display: flex;
-            justify-content: center;
-            gap: 6rem;
-            padding: 2.5rem 0;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-            margin-bottom: 4rem;
-        }
-
-        .status-item {
+        .action-area {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 15px;
+            align-items: center;
         }
 
-        .label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--text-muted);
-        }
-
-        .value {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* Pulse Indicator for "Live" status */
-        .live-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: #10b981;
-            border-radius: 50%;
-            margin-right: 6px;
-            box-shadow: 0 0 8px #10b981;
-        }
-
-        /* Actions */
-        .actions {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
-
-        .btn {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-dark);
+        .btn-exit {
+            padding: 12px 35px;
+            border: 1px solid #222;
+            color: #666;
             text-decoration: none;
-            border-bottom: 1px solid var(--text-dark);
-            padding-bottom: 4px;
-            transition: opacity 0.2s ease;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            transition: 0.4s;
+            letter-spacing: 2px;
         }
 
-        .btn:hover {
-            opacity: 0.4;
+        .btn-exit:hover {
+            border-color: var(--admin-red);
+            color: #fff;
+            background: rgba(255, 60, 60, 0.05);
         }
 
-        .footer {
+        .status-footer {
             position: absolute;
-            bottom: 40px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 300;
+            bottom: -60px;
+            left: 0;
+            width: 100%;
+            font-family: 'Share Tech Mono';
+            font-size: 10px;
+            color: #333;
+            letter-spacing: 3px;
         }
 
-        @media (max-width: 640px) {
-            .status-strip { gap: 2rem; flex-direction: column; padding: 2rem 0; }
-            h1 { font-size: 1.5rem; }
+        /* Scanline Effect */
+        .info-container::after {
+            content: " ";
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 2;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="icon-container">
-        <i class="fa-solid fa-gear"></i>
-    </div>
-
-    <div class="content">
-        <h1>Undergoing scheduled maintenance.</h1>
-        <p>We are currently updating our system settings to improve platform performance. Service will resume automatically once the configuration is finalized.</p>
-
-        <div class="status-strip">
-            <div class="status-item">
-                <span class="label">System Status</span>
-                <span class="value"><span class="live-dot"></span> Active</span>
-            </div>
-            <div class="status-item">
-                <span class="label">Current Task</span>
-                <span class="value">Optimizing Database</span>
-            </div>
-            <div class="status-item">
-                <span class="label">Availability</span>
-                <span class="value">Limited Access</span>
-            </div>
+    <div class="info-container">
+        <img src="1 LOGO 3D.png" class="brand-logo" alt="Logo">
+        
+        <h1>System Session Closed</h1>
+        
+        <div class="message">
+            The <b>Executive Assessment Console</b> has been disconnected. <br>
+            All administrative tokens have been revoked. <br>
+            Access is now restricted to <b>Level 4 Personnel</b> only.
         </div>
 
-        <div class="actions">
-            <a href="javascript:location.reload()" class="btn">Refresh System</a>
-            <a href="mailto:support@corporate.com" class="btn">Contact Administrator</a>
+        <div class="action-area">
+            <a href="" class="btn-exit">RETURN TO LOGIN</a>
+        </div>
+
+        <div class="status-footer">
+            NODE: SECURE_09 // STATUS: TERMINATED
         </div>
     </div>
 
-    <div class="footer">
-        &copy; 2026 Enterprise Infrastructure Group.
-    </div>
-
+    <script>
+        // Simple log for audit trail
+        console.log("Session manually closed at: " + new Date().toISOString());
+    </script>
 </body>
 </html>
